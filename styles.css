@@ -68,13 +68,7 @@ nav {
 }
 
 .hero-bg::before {
-  content: '';
-  position: absolute; inset: 0;
-  background-image:
-    linear-gradient(rgba(201,168,76,.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(201,168,76,.06) 1px, transparent 1px);
-  background-size: 60px 60px;
-  animation: gridMove 20s linear infinite;
+ display: none;
 }
 
 @keyframes gridMove {
@@ -372,10 +366,12 @@ section { padding: 120px 60px; }
 
 .about-box {
   width: 100%;
-  aspect-ratio: 4/5;
+  aspect-ratio: 1/1;
   background: var(--dark3);
   background-size: cover;
   background-image: url(ambienti/logo1.png);
+  background-position: center;
+  background-repeat: no-repeat;
   position: relative;
   overflow: hidden;
 }
@@ -393,11 +389,6 @@ section { padding: 120px 60px; }
     );
 }
 
-.about-box-inner {
-  position: absolute; inset: 0;
-  display: flex; align-items: center; justify-content: center;
-  flex-direction: column; gap: 16px;
-}
 
 .about-big-text {
   font-family: 'Playfair Display', serif;
@@ -417,8 +408,9 @@ section { padding: 120px 60px; }
 .about-accent-box {
   position: absolute;
   bottom: -24px; right: -24px;
-  width: 120px; height: 120px;
-  border: 2px solid var(--gold);
+  width: 80px; height: 80px;
+  border: 1px solid var(--gold);
+  opacity: 0.5;
 }
 
 .about-text .section-title { margin-bottom: 28px; }
@@ -545,4 +537,26 @@ footer p { font-size: .8rem; color: var(--text-muted); letter-spacing: 1px; }
   .hero-title { font-size: 2.8rem; }
   .btn-outline { display: none; }
   .stats-row { flex-direction: column; gap: 28px; }
+}
+.btn-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 24px;
+  padding: 12px 28px;
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-family: 'Jost', sans-serif;
+  font-size: .8rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background .3s, color .3s;
+}
+
+.btn-whatsapp:hover {
+  background: var(--gold);
+  color: var(--dark);
 }
