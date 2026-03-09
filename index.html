@@ -8,32 +8,77 @@
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/355696736765" class="float-wa" target="_blank">
+  <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.855L.057 23.428a.75.75 0 00.915.915l5.573-1.471A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.726 9.726 0 01-4.953-1.355l-.355-.211-3.676.97.984-3.595-.232-.371A9.722 9.722 0 012.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/>
+  </svg>
+</a>
 
+<!-- INSTAGRAM FLOAT -->
+<a href="https://www.instagram.com/enea_rental" class="float-ig" target="_blank">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+    <circle cx="12" cy="12" r="4"/>
+    <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"/>
+  </svg>
+</a>
 <!-- NAV -->
 <nav>
   <a class="nav-logo" href="#">Enea Rental</a>
-  <ul class="nav-links">
-    <li><a href="#services">Services</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
+
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <div class="nav-overlay" id="navOverlay" onclick="toggleMenu()"></div>
+
+  <div class="nav-panel" id="navPanel">
+    <div class="nav-panel-header">
+      <span class="nav-panel-logo">Enea Rental</span>
+      <button class="nav-close" onclick="toggleMenu()">✕</button>
+    </div>
+    <ul class="nav-panel-links">
+      <li><a href="#services" onclick="toggleMenu()"><span class="nav-num">01</span>Services</a></li>
+      <li><a href="#about" onclick="toggleMenu()"><span class="nav-num">02</span>About</a></li>
+      <li><a href="#contact" onclick="toggleMenu()"><span class="nav-num">03</span>Contact</a></li>
+      <li><a href="#community" onclick="toggleMenu()"><span class="nav-num">04</span>Community</a></li>
+    </ul>
+    <div class="nav-panel-footer">
+      <a href="tel:+355696736765" class="nav-call">📞 +355 69 673 6765</a>
+      <a href="https://wa.me/355696736765" target="_blank" class="nav-wa">💬 WhatsApp</a>
+      <p>📍 Rruga Skënderbeu, Sarandë</p>
+    </div>
+  </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-bg"></div>
-  <div class="hero-image"></div>
+
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="herocontentvideo.mp4" type="video/mp4">
+  </video>
+  <div class="hero-video-overlay"></div>
+
   <div class="hero-content">
-    <p class="hero-eyebrow">Albania's Premier Rental Company</p>
-    <h1 class="hero-title">
-      Explore <span>Albania</span><br>Your Way
-    </h1>
-    <p class="hero-sub">Cars, boats, apartments, tours & souvenirs — everything you need for an unforgettable experience.</p>
-    <a href="#services" class="btn">Our Services</a>
-    <a href="#contact" class="btn btn-outline">Get in Touch</a>
+    <div class="hero-box">
+      <p class="hero-eyebrow">Albania's Premier Rental Company</p>
+      <h1 class="hero-title">
+        Explore <span>Albania</span><br>Your Way
+      </h1>
+      <p class="hero-sub">Cars, boats, apartments, tours & souvenirs — everything you need for an unforgettable experience.</p>
+      <div class="hero-btns">
+        <a href="#services" class="btn">Our Services</a>
+        <a href="#contact" class="btn btn-outline">Get in Touch</a>
+      </div>
+    </div>
   </div>
+
   <div class="scroll-indicator">
-    <div class="scroll-line"></div>
   </div>
 </section>
 
@@ -216,27 +261,68 @@
     <div class="gold-divider"></div>
     <p>Enea Rental was founded with a simple mission: to make exploring Sarandë effortless and extraordinary. We are a local company with deep roots in the country, passionate about sharing our homeland's beauty with visitors from around the world.</p>
     <p>Whether you're a solo traveler, a couple, or a family — we tailor our services to your needs. Our team is available 24/7 to ensure your experience is seamless from start to finish.</p>
-    <div class="stats-row">
-      <div class="stat-item">
-        <h4>500+</h4>
-        <p>Happy Clients</p>
-      </div>
-      <div class="stat-item">
-        <h4>5</h4>
-        <p>Services</p>
-      </div>
-      <div class="stat-item">
-        <h4>24/7</h4>
-        <p>Support</p>
-      </div>
-    </div>
   </div>
 </section>
 
+<!-- STATS TICKER -->
+<div class="stats-ticker">
+  <div class="stats-track">
+    <span>500+ Happy Clients</span>
+    <span class="ticker-dot">★</span>
+    <span>5 Services</span>
+    <span class="ticker-dot">★</span>
+    <span>24/7 Support</span>
+    <span class="ticker-dot">★</span>
+    <span>500+ Happy Clients</span>
+    <span class="ticker-dot">★</span>
+    <span>5 Services</span>
+    <span class="ticker-dot">★</span>
+    <span>24/7 Support</span>
+    <span class="ticker-dot">★</span>
+  </div>
+</div>
+<!-- COMMUNITY -->
+<section id="community">
+  <div class="community-intro">
+    <p class="section-label">Through our clients' eyes</p>
+    <h2 class="section-title">Our <em>Community</em></h2>
+    <div class="gold-divider" style="margin: 0 auto 32px;"></div>
+  </div>
+
+  <div class="reviews-grid">
+    <div class="review-card" onclick="openModal('modal1')">
+      <div class="review-photo" style="background-image: url('felicia.jpeg')"></div>
+      <div class="review-hover">
+        <span class="click-label">Click for the review</span>
+      </div>
+    </div>
+
+    <div class="review-card" onclick="openModal('modal2')">
+      <div class="review-photo" style="background-image: url('2..jpeg')"></div>
+      <div class="review-hover">
+        <span class="click-label">Click for the review</span>
+      </div>
+    </div>
+
+    <div class="review-card" onclick="openModal('modal3')">
+      <div class="review-photo" style="background-image: url('sofi.jpeg')"></div>
+      <div class="review-hover">
+        <span class="click-label">Click for the review</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="community-cta">
+    <a href="https://share.google/xKxvjRzTdyDcfhRxs" target="_blank" class="btn-write-review">
+      Write a Review
+    </a>
+  </div>
+</section>
 <!-- CONTACT -->
 <section id="contact">
   <p class="section-label">Get In Touch</p>
   <h2 class="section-title">Ready to Explore?</h2>
+
   <div class="contact-grid">
     <div class="contact-item">
       <span>📍</span>
@@ -246,30 +332,92 @@
     <div class="contact-item">
       <span>📞</span>
       <h4>Phone</h4>
-      <a href="tel:+35569673675">+355 69 673 675</a>
+      <a href="tel:+355696736765">+355 69 673 6765</a>
     </div>
     <div class="contact-item">
       <span>✉️</span>
       <h4>Email</h4>
       <a href="mailto:enea.rental@gmail.com">enea.rental@gmail.com</a>
     </div>
-    <div class="contact-item">
-      <span>⭐</span>
-      <h4>Reviews</h4>
-      <a href="https://share.google/xKxvjRzTdyDcfhRxs" target="_blank">See on Google</a>
-    </div>
   </div>
-  <a href="https://share.google/xKxvjRzTdyDcfhRxs" target="_blank" class="google-btn">
-    ⭐ &nbsp; Review Us on Google
-  </a>
+
+  <div class="contact-form reveal">
+    <div class="form-row">
+      <div class="field">
+        <input type="text" placeholder=" " id="fname"/>
+        <label for="fname">Emri</label>
+      </div>
+      <div class="field">
+        <input type="text" placeholder=" " id="ftel"/>
+        <label for="ftel">Telefon</label>
+      </div>
+    </div>
+    <div class="field field-full">
+      <input type="text" placeholder=" " id="fsubj"/>
+      <label for="fsubj">Shërbimi që ju intereson</label>
+    </div>
+    <div class="field field-full">
+      <textarea placeholder=" " id="fmsg"></textarea>
+      <label for="fmsg">Mesazhi juaj</label>
+    </div>
+    <button class="btn-send" onclick="submitForm()">Dërgoni Kërkesën →</button>
+    <a href="https://share.google/xKxvjRzTdyDcfhRxs" target="_blank" class="reviews-link">
+      ⭐ &nbsp; Review Us on Google
+    </a>
+  </div>
 </section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-logo">Enea Rental</div>
-  <p>© 2025 Enea Rental. All rights reserved.</p>
-</footer>
+<!-- MODALS -->
+<div class="modal-overlay" id="modal1" onclick="closeModal('modal1')">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal('modal1')">✕</button>
+    <div class="modal-avatar">F</div>
+    <div class="modal-stars">★★★★★</div>
+    <p class="modal-name">Felicia</p>
+    <p class="modal-service">Private Tour</p>
+    <p class="modal-text">"Enea went above & beyond to ensure we saw everything on our list. We saw Butrint, Gjirokaster, The Blue Eye & Kalaja e Lëkurësit. The tour guide was very friendly & knowledgeable about Albania. The price of the tour was very reasonable. Enea also made us a few videos from our trip — a sweet gift that showed great gratitude to their customers. Thank you for an amazing day!"</p>
+  </div>
+</div>
 
+<div class="modal-overlay" id="modal2" onclick="closeModal('modal2')">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal('modal2')">✕</button>
+    <div class="modal-avatar">G</div>
+    <div class="modal-stars">★★★★★</div>
+    <p class="modal-name">Georgina Perez</p>
+    <p class="modal-service">Car Rental & Apartment</p>
+    <p class="modal-text">"Enea car rental is the place where you need to be. Very helpful, comfort and good prices. They actually gave us a free lift to the Ferry on our last day. They have an Airbnb and their Café menu is so delicious. Try it all and you won't regret it! Recommend them 100%. Thank you Enea for our first experience in Saranda!"</p>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal3" onclick="closeModal('modal3')">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal('modal3')">✕</button>
+    <div class="modal-avatar">S</div>
+    <div class="modal-stars">★★★★★</div>
+    <p class="modal-name">Sofi Krylova</p>
+    <p class="modal-service">Car Rental</p>
+    <p class="modal-text">"Totally recommend! We rented Toyota Yaris for our trip around Albania and the car was great as well as the service and very nice support during our rental period. We had to pay a fee for parking because we parked in the wrong spot and Enea Rental team helped us to solve it easily."</p>
+  </div>
+</div>
+
+<!-- Footer -->
+ <footer>
+  <div class="footer-map">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2981.234!2d20.0136291!3d39.8717187!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x135b153fde8e4c5d%3A0x45d75fbf1149d063!2sEnea%20Rental!5e0!3m2!1sen!2sal!4v1234567890"
+      width="100%" height="100%"
+      style="border:0;"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+      <div class="footer-top">
+    <div class="footer-logo">Enea Rental</div>
+    <p>© 2026 Enea Rental. All rights reserved.</p>
+  </div>
+  </div>
+</footer>
 <script src="script.js"></script>
 </body>
 </html>
