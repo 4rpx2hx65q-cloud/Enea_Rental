@@ -507,16 +507,48 @@ section { padding: 120px 60px; }
 .modal-text { color: var(--text-muted); font-size: .98rem; line-height: 1.9; font-style: italic; }
 
 /* FOOTER */
-footer { border-top: 1px solid rgba(255,255,255,.06); display: flex; flex-direction: column; }
+footer {
+  border-top: 1px solid rgba(255,255,255,.06);
+  display: flex;
+  flex-direction: column;
+}
+.footer-map {
+  width: 100%;
+  height: 220px;
+  filter: grayscale(100%) invert(92%) contrast(83%);
+  opacity: 0.85;
+}
 .footer-top {
-  padding: 32px 60px; display: flex;
-  align-items: center; justify-content: space-between;
+  padding: 32px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   border-bottom: 1px solid rgba(255,255,255,.06);
 }
-.footer-map { width: 100%; height: 220px; filter: grayscale(100%) invert(92%) contrast(83%); opacity: 0.85; transition: opacity .3s; }
-.footer-map:hover { opacity: 1; }
-footer p { font-size: .8rem; color: var(--text-muted); letter-spacing: 1px; }
-.footer-logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--gold); }
+.footer-bottom {
+  padding: 14px 60px;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border-top: 1px solid rgba(255,255,255,.04);
+}
+.footer-bottom p {
+  font-size: .68rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #888;
+  margin: 0;
+}
+.footer-credit-logo img {
+  height: 24px;
+  width: auto;
+  display: block;
+  opacity: 0.8;
+  transition: opacity .3s;
+}
+.footer-credit-logo:hover img { opacity: 1; }
 
 /* FLOATS */
 .float-wa, .float-ig {
@@ -564,3 +596,29 @@ footer p { font-size: .8rem; color: var(--text-muted); letter-spacing: 1px; }
   .modal-box { padding: 36px 24px; }
   .stats-track span { font-size: 1rem; }
 }
+.footer-bottom {
+  padding: 16px 60px;
+  background: #000;
+  text-align: center;
+  border-top: 1px solid rgba(255,255,255,.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+.footer-bottom p {
+  font-size: .72rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #888;
+  margin: 0;
+}
+.footer-credit-logo img {
+  height: 28px;
+  width: auto;
+  display: block;
+  opacity: 0.75;
+  transition: opacity .3s;
+  border-radius: 3px;
+}
+.footer-credit-logo:hover img { opacity: 1; }
