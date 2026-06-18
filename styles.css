@@ -152,7 +152,7 @@ nav {
   background: rgba(13,13,13,.72);
   border: 1px solid rgba(201,168,76,.22);
   backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
-  padding: 56px 64px; max-width: 680px; margin: 0 auto;
+  padding: 42px 50px; max-width: 680px; margin: 0 auto;
   box-shadow: 0 0 0 1px rgba(201,168,76,.08), 0 8px 40px rgba(0,0,0,.7), 0 32px 80px rgba(0,0,0,.5), inset 0 1px 0 rgba(201,168,76,.12);
   position: relative;
 }
@@ -174,15 +174,28 @@ nav {
 }
 .hero-title {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(3rem, 8vw, 7rem);
-  line-height: 1.05; font-weight: 700; margin-bottom: 24px;
-}
-.hero-title span { color: var(--gold); font-style: italic; }
-.hero-sub {
-  font-size: 1rem; color: var(--text-muted); letter-spacing: 1px;
-  margin-bottom: 48px; max-width: 500px; margin-left: auto; margin-right: auto;
+  font-size: clamp(3rem, 8vw, 6rem);
+  line-height: 1.05;
+  font-weight: 700;
+  margin-bottom: 24px;
 }
 
+.hero-title span {
+  display: block;
+  color: var(--gold);
+  font-style: italic;
+  font-size: 0.75em;
+  margin-top: 8px;
+}
+.hero-sub {
+  font-size: 1rem;
+  color: rgba(245,240,232,.85);
+  letter-spacing: 1px;
+  margin-bottom: 48px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
 /* BUTTONS */
 .btn {
   display: inline-block; padding: 15px 44px;
@@ -269,9 +282,12 @@ section { padding: 120px 60px; }
   border-radius: 50%; cursor: pointer; transition: background .3s, transform .3s;
 }
 .carousel-dot.active { background: var(--gold); transform: scale(1.3); }
-.service-info {
-  padding: 56px 52px; display: flex;
-  flex-direction: column; justify-content: center; position: relative;
+.service-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 .service-info::before {
   content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%;
@@ -280,8 +296,14 @@ section { padding: 120px 60px; }
 }
 .service-block:hover .service-info::before { opacity: 1; }
 .service-num-label {
-  font-size: .7rem; letter-spacing: 4px;
-  text-transform: uppercase; color: var(--gold); margin-bottom: 16px;
+  font-size: 1.1rem;
+  font-style: italic;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-shadow: 0 0 15px rgba(201,168,76,.25);
 }
 .service-info h3 {
   font-family: 'Playfair Display', serif;
@@ -308,6 +330,48 @@ section { padding: 120px 60px; }
   transition: background .3s, color .3s;
 }
 .btn-whatsapp:hover { background: var(--gold); color: var(--dark); }
+/* SINGLE IMAGE / VIDEO SERVICE */
+
+.service-image {
+  position: relative;
+  overflow: hidden;
+  height: 350px;
+
+}
+
+.service-image img,
+.service-image video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .6s ease;
+}
+
+.service-block:hover .service-image img,
+.service-block:hover .service-image video {
+  transform: scale(1.05);
+}
+
+.fleet-overlay-btn{
+  position: static;
+  display:inline-block;
+  margin-top:25px;
+
+  padding:9px 20px;
+  background:var(--gold);
+  color:var(--dark);
+  text-decoration:none;
+  text-transform:uppercase;
+  letter-spacing:2px;
+  font-weight:600;
+  font-size: .65rem;
+  white-space: nowrap;
+}
+
+.fleet-overlay-btn:hover{
+  background:var(--gold-light);
+}
 
 /* ABOUT */
 #about { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; padding-bottom: 0; }

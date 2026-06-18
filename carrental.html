@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Car Rental – Enea Rental Albania</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #C9A84C;
+  --gold-light: #E8C97A;
+  --dark: #0D0D0D;
+  --dark2: #161616;
+  --dark3: #1F1F1F;
+  --cream: #F5F0E8;
+  --text-muted: #888;
+  --white: #fff;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--dark);
+  color: var(--cream);
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; width: 100%;
+  z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 22px 60px;
+  background: linear-gradient(to bottom, rgba(13,13,13,.95) 0%, transparent 100%);
+  backdrop-filter: blur(4px);
+}
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem; color: var(--gold);
+  letter-spacing: 2px; text-decoration: none;
+}
+.hamburger {
+  display: flex; flex-direction: column;
+  justify-content: center; gap: 5px;
+  width: 40px; height: 40px;
+  background: none; border: none;
+  cursor: pointer; padding: 4px; z-index: 600;
+}
+.hamburger span {
+  display: block; width: 100%; height: 1.5px;
+  background: var(--cream);
+  transition: transform 0.4s, opacity 0.3s, width 0.3s;
+  transform-origin: left;
+}
+.hamburger.open span:nth-child(1) { transform: rotate(45deg) translateY(-1px); }
+.hamburger.open span:nth-child(2) { opacity: 0; width: 0; }
+.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translateY(1px); }
+.nav-overlay {
+  position: fixed; inset: 0;
+  background: rgba(13,13,13,.6);
+  backdrop-filter: blur(4px);
+  z-index: 700; opacity: 0;
+  pointer-events: none; transition: opacity 0.4s;
+}
+.nav-overlay.open { opacity: 1; pointer-events: all; }
+.nav-panel {
+  position: fixed; top: 0; right: 0;
+  width: 320px; height: 100vh;
+  background: var(--dark3);
+  border-left: 1px solid rgba(201,168,76,.15);
+  z-index: 800;
+  display: flex; flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.nav-panel.open { transform: translateX(0); }
+.nav-panel-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 28px 32px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.nav-panel-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem; color: var(--gold); letter-spacing: 2px;
+}
+.nav-close {
+  background: none; border: none; font-size: 1rem; cursor: pointer;
+  color: var(--text-muted); width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center; transition: color .3s;
+}
+.nav-close:hover { color: var(--gold); }
+.nav-panel-links {
+  list-style: none; flex: 1; padding: 40px 32px;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.nav-panel-links li a {
+  display: flex; align-items: center; gap: 20px;
+  text-decoration: none; color: var(--cream);
+  font-size: 1.6rem; font-weight: 300;
+  font-family: 'Playfair Display', serif;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  transition: color 0.3s, padding-left 0.3s;
+}
+.nav-panel-links li a:hover { color: var(--gold); padding-left: 8px; }
+.nav-num {
+  font-size: 0.7rem; letter-spacing: 2px;
+  color: var(--gold); font-family: 'Jost', sans-serif; font-weight: 500;
+}
+.nav-panel-footer {
+  padding: 28px 32px;
+  border-top: 1px solid rgba(255,255,255,.06);
+  display: flex; flex-direction: column; gap: 10px;
+}
+.nav-call {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--dark); color: var(--cream);
+  padding: 12px 20px; text-decoration: none;
+  font-size: 0.82rem; font-weight: 500; letter-spacing: 1px;
+  border: 1px solid rgba(255,255,255,.08); transition: border-color .2s, color .2s;
+}
+.nav-call:hover { border-color: var(--gold); color: var(--gold); }
+.nav-wa {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: #25d366; color: #fff;
+  padding: 12px 20px; text-decoration: none;
+  font-size: 0.82rem; font-weight: 500; letter-spacing: 1px; transition: opacity .2s;
+}
+.nav-wa:hover { opacity: 0.9; }
+.nav-panel-footer p { font-size: 0.78rem; color: var(--text-muted); letter-spacing: 1px; }
+
+/* PAGE HERO */
+.page-hero {
+  position: relative;
+  height: 52vh; min-height: 380px;
+  display: flex; align-items: flex-end;
+  overflow: hidden;
+  background: var(--dark2);
+}
+.page-hero-bg {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, #0D0D0D 0%, #1a1600 50%, #0D0D0D 100%);
+}
+
+.page-hero-pattern {
+  position: absolute; inset: 0; opacity: 0.04;
+  background-image:
+    repeating-linear-gradient(45deg, var(--gold) 0px, var(--gold) 1px, transparent 1px, transparent 60px),
+    repeating-linear-gradient(-45deg, var(--gold) 0px, var(--gold) 1px, transparent 1px, transparent 60px);
+}
+.page-hero-glow {
+  position: absolute; top: -100px; right: -100px;
+  width: 600px; height: 600px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,168,76,.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.page-hero-content {
+  position: relative; z-index: 2;
+  padding: 0 60px 64px;
+  animation: fadeUp .8s ease both;
+}
+.breadcrumb {
+  display: flex; align-items: center; gap: 10px;
+  font-size: .68rem; letter-spacing: 4px; text-transform: uppercase;
+  color: var(--text-muted); margin-bottom: 24px;
+}
+.breadcrumb a { color: var(--gold); text-decoration: none; transition: opacity .2s; }
+.breadcrumb a:hover { opacity: .7; }
+.breadcrumb span { color: rgba(255,255,255,.2); }
+.page-hero-content h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 700; line-height: 1.05;
+  margin-bottom: 16px;
+}
+.page-hero-content h1 em { font-style: italic; color: var(--gold); }
+.page-hero-sub {
+  color: var(--text-muted); font-size: 1rem; letter-spacing: 1px; max-width: 500px;
+}
+
+/* FILTER BAR */
+.filter-bar {
+  background: var(--dark3);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  padding: 0 60px;
+  display: flex; align-items: center; gap: 4px;
+  position: sticky; top: 72px; z-index: 50;
+  overflow-x: auto;
+}
+.filter-bar::-webkit-scrollbar { display: none; }
+.filter-btn {
+  padding: 18px 24px;
+  background: none; border: none;
+  color: var(--text-muted); font-family: 'Jost', sans-serif;
+  font-size: .72rem; font-weight: 500; letter-spacing: 3px;
+  text-transform: uppercase; cursor: pointer;
+  transition: color .3s; white-space: nowrap;
+  position: relative;
+}
+.filter-btn::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+  height: 2px; background: var(--gold);
+  transform: scaleX(0); transition: transform .3s;
+}
+.filter-btn:hover { color: var(--cream); }
+.filter-btn.active { color: var(--gold); }
+.filter-btn.active::after { transform: scaleX(1); }
+
+/* FLEET SECTION */
+.fleet-section { padding: 80px 60px; background: var(--dark); }
+.fleet-intro {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  margin-bottom: 64px; gap: 40px;
+}
+.fleet-intro-left .section-label {
+  font-size: .7rem; letter-spacing: 5px;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 12px;
+}
+.fleet-intro-left .section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 700; line-height: 1.15;
+}
+.fleet-intro-right {
+  color: var(--text-muted); font-size: .95rem;
+  line-height: 1.9; max-width: 400px; flex-shrink: 0;
+}
+.gold-divider { width: 60px; height: 2px; background: var(--gold); margin: 20px 0 0; }
+
+/* CARS GRID */
+.cars-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+.car-card {
+  background: var(--dark3);
+  position: relative; overflow: hidden;
+  transition: transform .4s ease;
+  cursor: default;
+}
+.car-card[data-category]:not(.visible) { display: none; }
+.car-card.visible { display: block; }
+
+/* CAR CAROUSEL */
+.car-carousel {
+  position: relative; overflow: hidden; aspect-ratio: 4/3;
+}
+.car-carousel-track {
+  display: flex; height: 100%;
+  transition: transform .55s cubic-bezier(.25,.46,.45,.94);
+}
+.car-carousel-slide {
+  min-width: 100%; height: 100%; overflow: hidden; position: relative;
+}
+.car-carousel-slide img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform .6s ease;
+}
+.car-card:hover .car-carousel-slide img { transform: scale(1.04); }
+.car-carousel-btn {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: rgba(13,13,13,.72); border: 1px solid rgba(201,168,76,.4);
+  color: var(--gold); width: 38px; height: 38px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 1rem; z-index: 10;
+  transition: background .3s, border-color .3s; backdrop-filter: blur(4px);
+}
+.car-carousel-btn:hover { background: rgba(201,168,76,.2); border-color: var(--gold); }
+.car-carousel-btn.prev { left: 10px; }
+.car-carousel-btn.next { right: 10px; }
+.car-carousel-dots {
+  position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 7px; z-index: 10;
+}
+.car-carousel-dot {
+  width: 6px; height: 6px; background: rgba(255,255,255,.35);
+  border-radius: 50%; cursor: pointer;
+  transition: background .3s, transform .3s;
+}
+.car-carousel-dot.active { background: var(--gold); transform: scale(1.3); }
+
+/* category badge */
+.car-badge {
+  position: absolute; top: 16px; left: 16px;
+  padding: 5px 14px;
+  background: rgba(13,13,13,.85);
+  border: 1px solid rgba(201,168,76,.35);
+  font-size: .6rem; letter-spacing: 3px; text-transform: uppercase; color: var(--gold);
+  backdrop-filter: blur(4px);
+  z-index: 5;
+}
+
+.car-body { padding: 28px 28px 32px; }
+.car-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem; color: var(--cream); margin-bottom: 6px;
+}
+.car-desc {
+  color: var(--text-muted); font-size: .85rem; line-height: 1.7; margin-bottom: 20px;
+}
+.car-specs {
+  display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 24px;
+}
+.spec { display: flex; flex-direction: column; gap: 2px; }
+.spec-label {
+  font-size: .58rem; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--gold); opacity: .8;
+}
+.spec-val { font-size: .82rem; font-weight: 500; color: var(--cream); }
+.car-price-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,.07);
+}
+.car-price {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem; color: var(--gold);
+}
+.car-price span {
+  font-family: 'Jost', sans-serif;
+  font-size: .68rem; letter-spacing: 2px; color: var(--text-muted); font-weight: 400;
+}
+.btn-book {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 24px;
+  background: transparent; border: 1px solid var(--gold); color: var(--gold);
+  font-family: 'Jost', sans-serif; font-size: .72rem; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase; text-decoration: none;
+  transition: background .3s, color .3s;
+}
+.btn-book:hover { background: var(--gold); color: var(--dark); }
+
+/* INFO STRIP */
+.info-strip {
+  background: var(--dark2);
+  border-top: 1px solid rgba(255,255,255,.06);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  padding: 64px 60px;
+}
+.info-strip-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
+}
+.info-item {
+  background: var(--dark3); padding: 40px 32px;
+  text-align: center; transition: background .3s;
+}
+.info-item:hover { background: rgba(201,168,76,.06); }
+.info-icon { font-size: 2rem; margin-bottom: 16px; display: block; }
+.info-item h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem; color: var(--cream); margin-bottom: 8px;
+}
+.info-item p { font-size: .82rem; color: var(--text-muted); line-height: 1.7; }
+
+/* BOOKING CTA */
+.booking-cta {
+  background: var(--dark); padding: 100px 60px;
+  text-align: center; position: relative; overflow: hidden;
+}
+.booking-cta-glow {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px; height: 300px;
+  background: radial-gradient(ellipse, rgba(201,168,76,.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+.booking-cta .section-label {
+  font-size: .7rem; letter-spacing: 5px;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: block;
+}
+.booking-cta h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 700; margin-bottom: 20px;
+}
+.booking-cta p {
+  color: var(--text-muted); font-size: 1rem; max-width: 500px; margin: 0 auto 48px;
+}
+.cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btn {
+  display: inline-block; padding: 15px 44px;
+  background: var(--gold); color: var(--dark);
+  font-family: 'Jost', sans-serif; font-weight: 600;
+  font-size: .85rem; letter-spacing: 3px; text-transform: uppercase;
+  text-decoration: none; transition: background .3s, transform .2s;
+}
+.btn:hover { background: var(--gold-light); transform: translateY(-2px); }
+.btn-outline {
+  background: transparent; border: 1px solid var(--gold); color: var(--gold);
+}
+.btn-outline:hover { background: rgba(201,168,76,.1); transform: translateY(-2px); }
+
+/* FOOTER */
+footer { border-top: 1px solid rgba(255,255,255,.06); display: flex; flex-direction: column; }
+.footer-top {
+  padding: 32px 60px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.footer-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem; color: var(--gold); letter-spacing: 2px;
+}
+.footer-top p { font-size: .75rem; color: var(--text-muted); letter-spacing: 1px; }
+.footer-bottom {
+  padding: 16px 60px; background: #000;
+  display: flex; align-items: center; justify-content: center;
+  gap: 16px; border-top: 1px solid rgba(255,255,255,.04);
+}
+.footer-bottom p { font-size: .72rem; letter-spacing: 2px; text-transform: uppercase; color: #888; margin: 0; }
+.footer-credit-logo img { height: 28px; width: auto; display: block; opacity: 0.75; transition: opacity .3s; border-radius: 3px; }
+.footer-credit-logo:hover img { opacity: 1; }
+
+/* FLOATS */
+.float-wa, .float-ig {
+  position: fixed; right: 24px;
+  width: 48px; height: 48px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 200; transition: transform .3s, box-shadow .3s;
+}
+.float-wa { bottom: 88px; background: #25d366; color: #fff; box-shadow: 0 8px 30px rgba(37,211,102,.35); }
+.float-ig {
+  bottom: 28px;
+  background: radial-gradient(circle at 30% 110%, #f09433, #dc2743 50%, #bc1888);
+  color: #fff; box-shadow: 0 8px 30px rgba(220,39,67,.35);
+}
+.float-wa:hover, .float-ig:hover { transform: scale(1.12); box-shadow: 0 12px 40px rgba(0,0,0,.4); }
+
+@keyframes fadeUp {
+  from { opacity:0; transform: translateY(40px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+
+/* RESPONSIVE */
+@media (max-width: 1100px) { .cars-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 900px) {
+  nav { padding: 20px 28px; }
+  .page-hero-content { padding: 0 28px 48px; }
+  .filter-bar { padding: 0 28px; }
+  .fleet-section { padding: 60px 28px; }
+  .fleet-intro { flex-direction: column; align-items: flex-start; }
+  .info-strip { padding: 48px 28px; }
+  .info-strip-grid { grid-template-columns: repeat(2, 1fr); }
+  .booking-cta { padding: 80px 28px; }
+  .footer-top { flex-direction: column; gap: 16px; text-align: center; padding: 28px; }
+}
+@media (max-width: 640px) {
+  .cars-grid { grid-template-columns: 1fr; }
+  .info-strip-grid { grid-template-columns: 1fr; }
+  .fleet-section { padding: 40px 20px; }
+  .page-hero-content h1 { font-size: 2.6rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/355696736765" class="float-wa" target="_blank">
+  <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.855L.057 23.428a.75.75 0 00.915.915l5.573-1.471A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.726 9.726 0 01-4.953-1.355l-.355-.211-3.676.97.984-3.595-.232-.371A9.722 9.722 0 012.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/>
+  </svg>
+</a>
+
+<!-- INSTAGRAM FLOAT -->
+<a href="https://www.instagram.com/enea_rental" class="float-ig" target="_blank">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+    <circle cx="12" cy="12" r="4"/>
+    <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"/>
+  </svg>
+</a>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">Enea Rental</a>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-overlay" id="navOverlay" onclick="toggleMenu()"></div>
+  <div class="nav-panel" id="navPanel">
+    <div class="nav-panel-header">
+      <span class="nav-panel-logo">Enea Rental</span>
+      <button class="nav-close" onclick="toggleMenu()">✕</button>
+    </div>
+    <ul class="nav-panel-links">
+      <li><a href="index.html#services" onclick="toggleMenu()"><span class="nav-num">01</span>Services</a></li>
+      <li><a href="index.html#about" onclick="toggleMenu()"><span class="nav-num">02</span>About</a></li>
+      <li><a href="index.html#contact" onclick="toggleMenu()"><span class="nav-num">03</span>Contact</a></li>
+      <li><a href="index.html#community" onclick="toggleMenu()"><span class="nav-num">04</span>Community</a></li>
+    </ul>
+    <div class="nav-panel-footer">
+      <a href="tel:+355696736765" class="nav-call">📞 +355 69 673 6765</a>
+      <a href="https://wa.me/355696736765" target="_blank" class="nav-wa">💬 WhatsApp</a>
+      <p>📍 Rruga Skënderbeu, Sarandë</p>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-pattern"></div>
+  <div class="page-hero-glow"></div>
+  <div class="page-hero-content">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span>/</span>
+      <span style="color:var(--cream)">Car Rental</span>
+    </div>
+    <h1>Drive Albania<br><em>Your Way</em></h1>
+    <p class="page-hero-sub">Modern fleet · Unbeatable prices · 24/7 support</p>
+  </div>
+</div>
+</section>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <button class="filter-btn active" data-filter="all">All Cars</button>
+  <button class="filter-btn" data-filter="compact">Compact</button>
+  <button class="filter-btn" data-filter="suv">SUV</button>
+</div>
+
+<!-- FLEET -->
+<section class="fleet-section">
+  <div class="fleet-intro">
+    <div class="fleet-intro-left">
+      <p class="section-label">Our Fleet</p>
+      <h2 class="section-title">Every Car,<br>Every Road</h2>
+      <div class="gold-divider"></div>
+    </div>
+    <p class="fleet-intro-right">
+      From city streets to mountain passes, our well-maintained fleet has the right vehicle for every journey. All cars are fully insured, regularly serviced, and delivered with a full tank.
+    </p>
+  </div>
+
+  <div class="cars-grid" id="carsGrid">
+
+    <!-- Fiat Panda -->
+    <div class="car-card visible" data-category="compact">
+      <div class="car-carousel">
+        <div class="car-carousel-track">
+          <div class="car-carousel-slide"><img src="cars/pandafront.JPG" alt="Fiat Panda"></div>
+          <div class="car-carousel-slide"><img src="cars/pandainterior.JPG" alt="Fiat Panda"></div>
+          <div class="car-carousel-slide"><img src="cars/pandaback.JPG" alt="Fiat Panda"></div>
+        </div>
+        <button class="car-carousel-btn prev">&#8249;</button>
+        <button class="car-carousel-btn next">&#8250;</button>
+        <div class="car-carousel-dots">
+          <div class="car-carousel-dot active"></div>
+          <div class="car-carousel-dot"></div>
+          <div class="car-carousel-dot"></div>
+        </div>
+        <div class="car-badge">Compact</div>
+      </div>
+      <div class="car-body">
+        <h3 class="car-name">Fiat Panda</h3>
+        <p class="car-desc">Perfect for city exploration and coastal roads. Fuel-efficient and easy to park anywhere in Sarandë.</p>
+        <div class="car-specs">
+          <div class="spec"><span class="spec-label">Seats</span><span class="spec-val">4</span></div>
+          <div class="spec"><span class="spec-label">Transmission</span><span class="spec-val">Automatic</span></div>
+          <div class="spec"><span class="spec-label">Fuel</span><span class="spec-val">Diesel</span></div>
+          <div class="spec"><span class="spec-label">A/C</span><span class="spec-val">Yes</span></div>
+        </div>
+        <div class="slogan">
+          <div class="car-price">Book more <span>pay less</span></div>
+          <a href="https://wa.me/355696736765?text=Hi!%20Is this car available for booking?%20I%20would%20like%20to%20know%20the%20price." class="btn-book" target="_blank">Contact for more →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- VW Passat -->
+    <div class="car-card visible" data-category="compact">
+      <div class="car-carousel">
+        <div class="car-carousel-track">
+          <div class="car-carousel-slide"><img src="cars/passat1.jpeg" alt="Volkswagen Passat"></div>
+          <div class="car-carousel-slide"><img src="cars/passat2.webp" alt="Volkswagen Passat"></div>
+        </div>
+        <button class="car-carousel-btn prev">&#8249;</button>
+        <button class="car-carousel-btn next">&#8250;</button>
+        <div class="car-carousel-dots">
+          <div class="car-carousel-dot active"></div>
+          <div class="car-carousel-dot"></div>
+          <div class="car-carousel-dot"></div>
+        </div>
+        <div class="car-badge">Compact</div>
+      </div>
+      <div class="car-body">
+        <h3 class="car-name">Volkswagen Passat</h3>
+        <p class="car-desc">A European favourite. Smooth ride, modern interior, ideal for couples or solo travellers exploring the Riviera.</p>
+        <div class="car-specs">
+          <div class="spec"><span class="spec-label">Seats</span><span class="spec-val">4</span></div>
+          <div class="spec"><span class="spec-label">Transmission</span><span class="spec-val">Automatic</span></div>
+          <div class="spec"><span class="spec-label">Fuel</span><span class="spec-val">Diesel</span></div>
+          <div class="spec"><span class="spec-label">A/C</span><span class="spec-val">Yes</span></div>
+        </div>
+         <div class="slogan">
+          <div class="car-price">Book more <span>pay less</span></div>
+          <a href="https://wa.me/355696736765?text=Hi!%20Is this car available for booking?%20I%20would%20like%20to%20know%20the%20price." class="btn-book" target="_blank">Contact for more →</a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- B-CLASS -->
+    <div class="car-card visible" data-category="compact">
+      <div class="car-carousel">
+        <div class="car-carousel-track">
+          <div class="car-carousel-slide"><img src="cars/BFRONT.jpg" alt="Mercedes B-class"></div>
+          <div class="car-carousel-slide"><img src="cars/BBACK.jpg" alt="Mercedes B-class"></div>
+          <div class="car-carousel-slide"><img src="cars/BINT.jpg" alt="Mercedes B-class"></div>
+        </div>
+        <button class="car-carousel-btn prev">&#8249;</button>
+        <button class="car-carousel-btn next">&#8250;</button>
+        <div class="car-carousel-dots">
+          <div class="car-carousel-dot active"></div>
+          <div class="car-carousel-dot"></div>
+          <div class="car-carousel-dot"></div>
+        </div>
+        <div class="car-badge">Compact</div>
+      </div>
+      <div class="car-body">
+        <h3 class="car-name">Mercedes B-class</h3>
+        <p class="car-desc">The Mercedes-Benz B-Class is the perfect choice for travelers seeking comfort, safety, and efficiency.</p>
+        <div class="car-specs">
+          <div class="spec"><span class="spec-label">Seats</span><span class="spec-val">4</span></div>
+          <div class="spec"><span class="spec-label">Transmission</span><span class="spec-val">Automatic</span></div>
+          <div class="spec"><span class="spec-label">Fuel</span><span class="spec-val">Diesel</span></div>
+          <div class="spec"><span class="spec-label">A/C</span><span class="spec-val">Yes</span></div>
+        </div>
+          <div class="slogan">
+          <div class="car-price">Book more <span>pay less</span></div>
+          <a href="https://wa.me/355696736765?text=Hi!%20Is this car available for booking?%20I%20would%20like%20to%20know%20the%20price." class="btn-book" target="_blank">Contact for more →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mini Cooper D COUNTRYMAN -->
+    <div class="car-card visible" data-category="compact">
+      <div class="car-carousel">
+        <div class="car-carousel-track">
+          <div class="car-carousel-slide"><img src="cars/MINI1.jpg" alt="Mini Cooper D COUNTRYMAN"></div>
+          <div class="car-carousel-slide"><img src="cars/MINI2.jpg" alt="Mini Cooper D COUNTRYMAN"></div>
+          <div class="car-carousel-slide"><img src="cars/MINI3.jpg" alt="Mini Cooper D COUNTRYMAN"></div>
+        </div>
+        <button class="car-carousel-btn prev">&#8249;</button>
+        <button class="car-carousel-btn next">&#8250;</button>
+        <div class="car-carousel-dots">
+          <div class="car-carousel-dot active"></div>
+          <div class="car-carousel-dot"></div>
+          <div class="car-carousel-dot"></div>
+        </div>
+        <div class="car-badge">Compact</div>
+      </div>
+      <div class="car-body">
+        <h3 class="car-name">Mini Cooper D COUNTRYMAN</h3>
+        <p class="car-desc">MINI Cooper combines iconic style, driving fun, and practicality, making it an excellent choice for exploring Albania.</p>
+        <div class="car-specs">
+          <div class="spec"><span class="spec-label">Seats</span><span class="spec-val">4</span></div>
+          <div class="spec"><span class="spec-label">Transmission</span><span class="spec-val">Manual</span></div>
+          <div class="spec"><span class="spec-label">Fuel</span><span class="spec-val">Diesel</span></div>
+          <div class="spec"><span class="spec-label">A/C</span><span class="spec-val">Yes</span></div>
+        </div>
+           <div class="slogan">
+          <div class="car-price">Book more <span>pay less</span></div>
+          <a href="https://wa.me/355696736765?text=Hi!%20Is this car available for booking?%20I%20would%20like%20to%20know%20the%20price." class="btn-book" target="_blank">Contact for more →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Jeep Wrangler -->
+    <div class="car-card visible" data-category="suv">
+      <div class="car-carousel">
+        <div class="car-carousel-track">
+          <div class="car-carousel-slide"><img src="cars/jeep1.jpg" alt="Jeep Wrangler"></div>
+          <div class="car-carousel-slide"><img src="cars/jeep2.jpg" alt="Jeep Wrangler"></div>
+          <div class="car-carousel-slide"><img src="cars/jeep3.jpg" alt="Jeep Wrangler"></div>
+        </div>
+        <button class="car-carousel-btn prev">&#8249;</button>
+        <button class="car-carousel-btn next">&#8250;</button>
+        <div class="car-carousel-dots">
+          <div class="car-carousel-dot active"></div>
+          <div class="car-carousel-dot"></div>
+          <div class="car-carousel-dot"></div>
+        </div>
+        <div class="car-badge">Suv</div>
+      </div>
+      <div class="car-body">
+        <h3 class="car-name">Jeep Wrangler</h3>
+        <p class="car-desc">Elegant design meets rugged performance. Perfect for families or groups wanting comfort without compromise.</p>
+        <div class="car-specs">
+          <div class="spec"><span class="spec-label">Seats</span><span class="spec-val">4</span></div>
+          <div class="spec"><span class="spec-label">Transmission</span><span class="spec-val">Automatic</span></div>
+          <div class="spec"><span class="spec-label">Fuel</span><span class="spec-val">Petrol</span></div>
+          <div class="spec"><span class="spec-label">A/C</span><span class="spec-val">Yes</span></div>
+        </div>
+        <div class="slogan">
+          <div class="car-price">Book more <span>pay less</span></div>
+          <a href="https://wa.me/355696736765?text=Hi!%20Is this car available for booking?%20I%20would%20like%20to%20know%20the%20price." class="btn-book" target="_blank">Contact for more →</a>
+        </div>
+      </div>
+    </div>
+    </div>
+<!-- INFO STRIP -->
+<div class="info-strip">
+  <div class="info-strip-grid">
+    <div class="info-item">
+      <span class="info-icon">🛡️</span>
+      <h4>Insurance</h4>
+      <p>All vehicles include comprehensive coverage. Drive with complete peace of mind.</p>
+    </div>
+    <div class="info-item">
+      <span class="info-icon">⛽</span>
+      <h4>Full Tank</h4>
+      <p>Every rental starts with a full tank. Return it full — no hidden fuel fees.</p>
+    </div>
+    <div class="info-item">
+      <span class="info-icon">📍</span>
+      <h4>Free Delivery</h4>
+      <p>We deliver your car directly to your hotel, port, or airport in Tiranë.</p>
+    </div>
+    <div class="info-item">
+      <span class="info-icon">📞</span>
+      <h4>24/7 Support</h4>
+      <p>Our team is always available. Call or WhatsApp us at any hour, any day.</p>
+    </div>
+  </div>
+</div>
+
+<!-- BOOKING CTA -->
+<section class="booking-cta">
+  <div class="booking-cta-glow"></div>
+  <span class="section-label">Ready to Go?</span>
+  <h2>Book Your Car Today</h2>
+  <p>Contact us on WhatsApp for instant availability, pricing, and personalized recommendations for your trip.</p>
+  <div class="cta-btns">
+    <a href="https://wa.me/355696736765?text=Përshëndetje!%20Dua%20të%20rezervoj%20një%20makinë." class="btn" target="_blank">💬 Book via WhatsApp</a>
+    <a href="tel:+355696736765" class="btn btn-outline">📞 Call Us</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-logo">Enea Rental</div>
+    <p>© 2026 Enea Rental. All rights reserved.</p>
+  </div>
+  <div class="footer-bottom">
+    <p>Web design &amp; development by</p>
+    <a href="https://share.google/2fGV6CkjPBnUPsl1h" target="_blank" class="footer-credit-logo">
+      <img src="logo.jpg" alt="branding.al" />
+    </a>
+  </div>
+</footer>
+
+<script>
+// NAV
+function toggleMenu() {
+  const hamburger = document.getElementById('hamburger');
+  const navPanel = document.getElementById('navPanel');
+  const navOverlay = document.getElementById('navOverlay');
+  hamburger.classList.toggle('open');
+  navPanel.classList.toggle('open');
+  navOverlay.classList.toggle('open');
+  document.body.style.overflow = navPanel.classList.contains('open') ? 'hidden' : '';
+}
+
+// CAR CAROUSELS
+document.querySelectorAll('.car-carousel').forEach(carousel => {
+  const track = carousel.querySelector('.car-carousel-track');
+  const slides = carousel.querySelectorAll('.car-carousel-slide');
+  const dots = carousel.querySelectorAll('.car-carousel-dot');
+  let current = 0;
+
+  function goTo(idx) {
+    current = (idx + slides.length) % slides.length;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+  }
+
+  carousel.querySelector('.prev').addEventListener('click', e => { e.stopPropagation(); goTo(current - 1); });
+  carousel.querySelector('.next').addEventListener('click', e => { e.stopPropagation(); goTo(current + 1); });
+  dots.forEach((d, i) => d.addEventListener('click', e => { e.stopPropagation(); goTo(i); }));
+  setInterval(() => goTo(current + 1), 4500);
+});
+
+// FILTER
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    const filter = this.dataset.filter;
+    document.querySelectorAll('.car-card').forEach(card => {
+      const cat = card.dataset.category || '';
+      if (filter === 'all' || cat.includes(filter)) {
+        card.classList.add('visible');
+        card.style.animation = 'fadeUp .4s ease both';
+      } else {
+        card.classList.remove('visible');
+      }
+    });
+  });
+});
+
+// NAV scroll
+window.addEventListener('scroll', () => {
+  document.querySelector('nav').style.background =
+    window.scrollY > 60
+      ? 'rgba(13,13,13,.97)'
+      : 'linear-gradient(to bottom, rgba(13,13,13,.95) 0%, transparent 100%)';
+});
+</script>
+</body>
+</html>
